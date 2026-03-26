@@ -1,0 +1,1 @@
+{\n  "name": "CineBook",\n  "version": "1.0.0",\n  "main": "index.js",\n  "dependencies": {\n    "react": "^17.0.1",\n    "react-native": "^0.64.0",\n    "expo": "^44.0.0"\n  },\n  "devDependencies": {\n    "@babel/core": "^7.0.0"\n  },\n  "scripts": {\n    "start": "expo start",\n    "build": "expo build"\n  }\n}
