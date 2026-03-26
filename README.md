@@ -9,7 +9,7 @@ A full-stack movie ticket booking web application built with React (Vite) + Tail
 ```
 movie-booking/
 ├── backend/
-│   ├── config/         # Prisma client instance 
+│   ├── config/         # Prisma client instance
 │   ├── controllers/    # Business logic (auth, movies, shows, seats, bookings, theaters)
 │   ├── middleware/     # JWT auth, admin guard, error handler
 │   ├── prisma/
