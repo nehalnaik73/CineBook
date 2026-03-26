@@ -18,7 +18,6 @@ import AdminShows from './pages/admin/Shows'
 import AdminBookings from './pages/admin/Bookings'
 
 function ProtectedRoute({ children }) {
-  const { user } = useAuth()
   return user ? children : <Navigate to="/login" replace />
 }
 
@@ -30,6 +29,7 @@ function AdminRoute({ children }) {
 }
 
 function AppRoutes() {
+  const { user } = useAuth()
   return (
     <>
       <Navbar />
@@ -40,8 +40,8 @@ function AppRoutes() {
         <Route path="/shows/:showId/seats" element={<ProtectedRoute><ShowSeats /></ProtectedRoute>} />
         <Route path="/payment" element={<ProtectedRoute><Payment /></ProtectedRoute>} />
         <Route path="/confirmation/:bookingId" element={<ProtectedRoute><Confirmation /></ProtectedRoute>} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
+        <Route path="/login"    element={user ? <Navigate to="/" replace /> : <Login />} />
+        <Route path="/register" element={user ? <Navigate to="/" replace /> : <Register />} />
         <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
         <Route path="/admin" element={<AdminRoute><AdminDashboard /></AdminRoute>} />
         <Route path="/admin/movies" element={<AdminRoute><AdminMovies /></AdminRoute>} />
