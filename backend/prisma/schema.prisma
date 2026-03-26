@@ -1,0 +1,86 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        Int       @id @default(autoincrement())
+  name      String
+  email     String    @unique
+  password  String
+  phone     String?
+  role      String    @default("user")
+  createdAt DateTime  @default(now())
+  bookings  Booking[]
+}
+
+model Movie {
+  id          Int     @id @default(autoincrement())
+  title       String
+  description String
+  genre       String
+  language    String
+  duration    Int
+  rating      String
+  poster      String?
+  releaseDate String
+  isActive    Boolean @default(true)
+  shows       Show[]
+}
+
+model Theater {
+  id       Int    @id @default(autoincrement())
+  name     String
+  city     String
+  address  String
+  shows    Show[]
+}
+
+model Show {
+  id        Int      @id @default(autoincrement())
+  movieId   Int
+  theaterId Int
+  date      String
+  time      String
+  format    String   @default("2D")
+  price     Float
+  movie     Movie    @relation(fields: [movieId], references: [id])
+  theater   Theater  @relation(fields: [theaterId], references: [id])
+  seats     Seat[]
+  bookings  Booking[]
+}
+
+model Seat {
+  id       Int      @id @default(autoincrement())
+  showId   Int
+  row      String
+  number   Int
+  status   String   @default("available")
+  show     Show     @relation(fields: [showId], references: [id])
+  bookings BookingSeat[]
+}
+
+model Booking {
+  id            Int           @id @default(autoincrement())
+  userId        Int
+  showId        Int
+  totalAmount   Float
+  status        String        @default("confirmed")
+  paymentMethod String?
+  createdAt     DateTime      @default(now())
+  user          User          @relation(fields: [userId], references: [id])
+  show          Show          @relation(fields: [showId], references: [id])
+  seats         BookingSeat[]
+}
+
+model BookingSeat {
+  id        Int     @id @default(autoincrement())
+  bookingId Int
+  seatId    Int
+  booking   Booking @relation(fields: [bookingId], references: [id])
+  seat      Seat    @relation(fields: [seatId], references: [id])
+}
