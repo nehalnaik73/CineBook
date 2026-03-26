@@ -15,7 +15,7 @@ movie-booking/
 │   ├── prisma/
 │   │   ├── schema.prisma   # Database schema
 │   │   └── seed.js         # Sample data seeder
-│   ├── routes/         # Express routers
+│   ├── routes/         # Express routers  ( check session status before opening login/signup page)
 │   ├── app.js          # Express app setup
 │   ├── server.js       # HTTP server entry point
 │   ├── .env            # Environment variables
